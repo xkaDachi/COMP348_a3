@@ -1,3 +1,9 @@
+//#{self.class.name}; etc.
+//#{self.perimeter}
+//#{self.area}
+
+
+#Question 1
 class Shape  
     attr_accessor :name, :perimeter, :area
 
@@ -9,15 +15,15 @@ class Shape
     end
 
     def print()
-        puts "Name: #@name, Perimeter: #@perimeter, Area: #@area"
+        puts "#{self.class.name}, perimeter: #{self.perimeter}, area: #{self.area}"
     end
 
     def perimeter()
-        return nil
+        return "undefined"
     end
     
     def area()
-        return nil
+        return "undefined"
     end
 end
 
@@ -71,9 +77,13 @@ class Ellipse < Shape
         @name = "Ellipse"
         @semiMajor = semiMajor
         @semiMinor = semiMinor
-        @perimeter = "Not implemented"
+        @perimeter = "undefined"
         @area = area()
         @eccentricity = eccentricity()
+    end
+
+    def perimeter()
+        return "undefined"
     end
 
     def area()
@@ -81,26 +91,80 @@ class Ellipse < Shape
     end
 
     def eccentricity() 
-        return Math.sqrt(semiMajor*semiMajor - semiMinor*semiMinor)
+        return Math.sqrt((semiMajor*semiMajor - semiMinor*semiMinor).abs)
     end
 
     def print()
-        puts "Name: #@name, Perimeter: #@perimeter, Area: #@area, Eccentricity: #@eccentricity"
+        puts "#@name, perimeter: #@perimeter, area: #@area" #, eccentricity: #@eccentricity"
     end
 end
 
-s1 = Shape.new()
-s1.print()
+# s1 = Shape.new()
+# s1.print()
 
-c1 = Circle.new(5)
-c1.print()
+# c1 = Circle.new(5)
+# c1.print()
 
-r1 = Rectangle.new(4, 5)
-r1.print()
+# r1 = Rectangle.new(4, 5)
+# r1.print()
 
-e1 = Ellipse.new(5, 4)
-e1.print()
+# e1 = Ellipse.new(5, 4)
+# e1.print()
 
+#-----------------------------------------------------------------------------------------------
+#Question 2 and Question 3
 
+shapeHash = {"Shape(s): " => 0,
+            "Rectangle(s): " => 0,
+            "Circle(s): " => 0,
+            "Ellipse(s): " => 0}
 
+aFile = File.open("info.txt") do |line|
+    line.each do |item|
+        name, c1, c2 = item.chomp.split(' ')
 
+        if (name == "shape")
+            shapeInfo = Shape.new()
+            shapeInfo.print
+            shapeHash["Shape(s): "]+=1
+        end
+
+        if (name == "rectangle")
+            if c1.to_i >= 0 and c2.to_i >= 0
+                shapeInfo = Rectangle.new(c1.to_i, c2.to_i)
+                shapeInfo.print
+                shapeHash["Shape(s): "]+=1
+                shapeHash["Rectangle(s): "]+=1
+            else
+                puts "Error: Invalid Rectangle"
+            end
+        end
+
+        if (name == "circle")
+            if c1.to_i >= 0
+                shapeInfo = Circle.new(c1.to_i)
+                shapeInfo.print
+                shapeHash["Shape(s): "]+=1
+                shapeHash["Circle(s): "]+=1
+            else
+                puts "Error: Invalid Circle"
+            end
+        end
+
+        if (name == "ellipse")
+            if c1.to_i >= 0 and c2.to_i >= 0
+                shapeInfo = Ellipse.new(c1.to_i, c2.to_i)
+                shapeInfo.print
+                shapeHash["Shape(s): "]+=1  
+                shapeHash["Ellipse(s): "]+=1           
+            else
+                puts "Error: Invalid Ellipse"
+            end
+        end
+    end
+end
+
+puts "\nStatistics"
+shapeHash.each do |key, value|
+    puts "  " + key + value.to_s
+end
