@@ -146,6 +146,8 @@ aFile = File.open("info.txt") do |line|
                 shapeHash["Rectangle(s): "]+=1
             else
                 puts "Error: Invalid Rectangle"
+                shapeHash["Shape(s): "]+=1
+                shapeHash["Rectangle(s): "]+=1
             end
         end
 
@@ -157,6 +159,8 @@ aFile = File.open("info.txt") do |line|
                 shapeHash["Circle(s): "]+=1
             else
                 puts "Error: Invalid Circle"
+                shapeHash["Shape(s): "]+=1
+                shapeHash["Circle(s): "]+=1
             end
         end
 
@@ -168,6 +172,8 @@ aFile = File.open("info.txt") do |line|
                 shapeHash["Ellipse(s): "]+=1         
             else
                 puts "Error: Invalid Ellipse"
+                shapeHash["Shape(s): "]+=1
+                shapeHash["Ellipse(s): "]+=1 
             end
         end
     end
