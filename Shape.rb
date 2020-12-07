@@ -8,22 +8,36 @@ class Shape
     attr_accessor :name, :perimeter, :area
 
     def initialize()
-        #puts "Creating a shape" #for testing
         @name = "Shape"
-        @perimeter = 0
-        @area = 0
+        @perimeter = nil
+        @area = nil
     end
 
-    def print()
+    def print()        
+        if (perimeter == nil and area == nil)
+            puts "#{self.class.name}, perimeter: undefined, area: undefined"
+            return
+        end
+
+        if (perimeter == nil)
+            puts "#{self.class.name}, perimeter: undefined, area: #{self.area}"
+            return
+        end
+
+        if (area == nil)
+            puts "#{self.class.name}, perimeter: #{self.perimeter}, area: undefined"
+            return
+        end
+
         puts "#{self.class.name}, perimeter: #{self.perimeter}, area: #{self.area}"
     end
 
     def perimeter()
-        return "undefined"
+        return nil
     end
     
     def area()
-        return "undefined"
+        return nil
     end
 end
 
@@ -77,13 +91,13 @@ class Ellipse < Shape
         @name = "Ellipse"
         @semiMajor = semiMajor
         @semiMinor = semiMinor
-        @perimeter = "undefined"
+        @perimeter = nil
         @area = area()
         @eccentricity = eccentricity()
     end
 
     def perimeter()
-        return "undefined"
+        return nil
     end
 
     def area()
@@ -92,10 +106,6 @@ class Ellipse < Shape
 
     def eccentricity() 
         return Math.sqrt((semiMajor*semiMajor - semiMinor*semiMinor).abs)
-    end
-
-    def print()
-        puts "#@name, perimeter: #@perimeter, area: #@area" #, eccentricity: #@eccentricity"
     end
 end
 
@@ -152,11 +162,11 @@ aFile = File.open("info.txt") do |line|
         end
 
         if (name == "ellipse")
-            if c1.to_i >= 0 and c2.to_i >= 0
+            if c1.to_i >= 0 and c2.to_i >= 0 and c1.to_i != c2.to_i
                 shapeInfo = Ellipse.new(c1.to_i, c2.to_i)
                 shapeInfo.print
                 shapeHash["Shape(s): "]+=1  
-                shapeHash["Ellipse(s): "]+=1           
+                shapeHash["Ellipse(s): "]+=1         
             else
                 puts "Error: Invalid Ellipse"
             end
