@@ -1,7 +1,6 @@
-//#{self.class.name}; etc.
-//#{self.perimeter}
-//#{self.area}
-
+#{self.class.name} vs @name
+#{self.perimeter} vs @perimeter
+#{self.area} vs @area
 
 #Question 1
 class Shape  
