@@ -23,7 +23,7 @@ public privileged aspect ShapeAspect {
 	//Q5 Using aspects, override the toString() method in Rectangle.
 	//The toString() methods call the getName() in 4.2.1 and generates a string, representing the object.
 	public String Rectangle.toString() {
-		return getName() + "(" + (int) this.height + ", " + (int) this.width + ")"; //A Rectangle with a width of 2 and a height of 10 is represented as Rectangle(2,10).
+		return getName() + "(" + (int) this.width + ", " + (int) this.height + ")"; //A Rectangle with a width of 2 and a height of 10 is represented as Rectangle(2,10).
 	}
 
 	//----------------------------------------------------------------------------------------------------
